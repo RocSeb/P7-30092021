@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet7</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Logo Les petits plats -->
+    <!-- Filter content will be placed inside the header -->
+    <!-- 1 filter with icon + 3 dropdown -->
+    <header>
+      <figure>
+        <a href="media/LesPetitsPlats-logo.png">
+          <img id="logo-size" src="media/LesPetitsPlats-logo.png" alt="Logo de l'entreprise les petits plats">
+        </a>
+      </figure>
+      <div class="search">
+			  <form method="post">
+				  <input id="search-bar" name="searchbar" type="search" placeholder="Search Here">
+			  </form>
+		  </div>
+
+      <section class="section-drop">
+        <div class="test">
+          <div class="content-drop">
+            <input  class="input-ingredient input-dropdown input-cont" type="text" list="ingredient" name="myIngredient" placeholder="Ingrédients"/>
+            <i class="fas fa-sort-down"></i>
+          </div>
+            <div class="bouton-down">
+              <ul class=".dropdown-ingredients dropdown-cont" id="ingredient">
+                
+              </ul>
+          </div>
+        </div>
+        
+        <div class="test">
+          <div class="content-drop">
+            <input  class="input-appareil input-dropdown input-cont" type="text" list="appliances" name="myAppliance" placeholder="Appareils"/>
+            <i class="fas fa-sort-down"></i>
+          </div>
+            <div class="bouton-down">
+              <ul class=".dropdown-appareils dropdown-cont" id="appliances">
+                
+              </ul>
+          </div>
+        </div>
+        
+        <div class="test">
+          <div class="content-drop">
+            <input  class="input-ustensiles input-dropdown input-cont" type="text" list="ustensiles" name="myUstensile" placeholder="Ustensiles"/>
+            <i class="fas fa-sort-down"></i>
+          </div>
+            <div class="bouton-down">
+              <ul class="dropdown-ustensiles dropdown-cont" id="ustensiles">
+                
+              </ul>
+          </div>
+        </div>
+        
+        </section>
+    </header>
+    <!-- Recipe List content will be placed inside the main -->
+    <main>
+      <section id="recipes-container">
+            
+            
+      </section>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="module" src="js/recipes.js"></script>
+    <script type="module" src="js/recipes-box.js"></script>
+    <script type="module" src="js/dropdown.js"></script>
+    <script>
+      $(".fa-sort-down").click(function() {
+        $(this).toggleClass("on");
+        $("ul").slideToggle();
+      });
+    </script>
+</body>
+</html>
