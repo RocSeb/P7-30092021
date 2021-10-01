@@ -26,37 +26,37 @@
 		  </div>
 
       <section class="section-drop">
-        <div class="test">
+        <div class="bloc-dropdown bloc-ingredients">
           <div class="content-drop">
             <input  class="input-ingredient input-dropdown input-cont" type="text" list="ingredient" name="myIngredient" placeholder="Ingrédients"/>
-            <i class="fas fa-sort-down"></i>
+            <i class="fas fa-sort-down unroll-ingredients"></i>
           </div>
             <div class="bouton-down">
-              <ul class=".dropdown-ingredients dropdown-cont" id="ingredient">
+              <ul class="dropdown-ingredients dropdown-cont" id="ingredient" style="display: none;">
                 
               </ul>
           </div>
         </div>
         
-        <div class="test">
+        <div class="bloc-dropdown bloc-appareils">
           <div class="content-drop">
             <input  class="input-appareil input-dropdown input-cont" type="text" list="appliances" name="myAppliance" placeholder="Appareils"/>
-            <i class="fas fa-sort-down"></i>
+            <i class="fas fa-sort-down unroll-appareils"></i>
           </div>
             <div class="bouton-down">
-              <ul class=".dropdown-appareils dropdown-cont" id="appliances">
+              <ul class="dropdown-appareils dropdown-cont" id="appliances" style="display: none;">
                 
               </ul>
           </div>
         </div>
         
-        <div class="test">
+        <div class="bloc-dropdown bloc-ustensiles">
           <div class="content-drop">
             <input  class="input-ustensiles input-dropdown input-cont" type="text" list="ustensiles" name="myUstensile" placeholder="Ustensiles"/>
-            <i class="fas fa-sort-down"></i>
+            <i class="fas fa-sort-down unroll-ustensiles"></i>
           </div>
             <div class="bouton-down">
-              <ul class="dropdown-ustensiles dropdown-cont" id="ustensiles">
+              <ul class="dropdown-ustensiles dropdown-cont" id="ustensiles" style="display: none;">
                 
               </ul>
           </div>
@@ -80,9 +80,20 @@
     <script type="module" src="js/recipes-box.js"></script>
     <script type="module" src="js/dropdown.js"></script>
     <script>
-      $(".fa-sort-down").click(function() {
+      $(".unroll-ingredients").click(function() {
         $(this).toggleClass("on");
-        $("ul").slideToggle();
+        $(".dropdown-ingredients").slideToggle();
+        $(".bloc-ingredients").toggleClass("changeWidth");
+      });
+      $(".unroll-appareils").click(function() {
+        $(this).toggleClass("on");
+        $(".dropdown-appareils").slideToggle();
+        $(".bloc-appareils").toggleClass("changeWidth");
+      });
+      $(".unroll-ustensiles").click(function() {
+        $(this).toggleClass("on");
+        $(".dropdown-ustensiles").slideToggle();
+        $(".bloc-ustensiles").toggleClass("changeWidth");
       });
     </script>
 </body>

@@ -7,6 +7,8 @@ const appareilsItem = document.querySelector(".dropdown-appareils");
 const ustensilesItem = document.querySelector(".dropdown-ustensiles");
 const dropButton = document.querySelector(".fa-sort-down");
 const inputUstensiles = document.querySelector(".input-ustensiles");
+const inputAppareils = document.querySelector(".input-appareil");
+const inputIngredients = document.querySelector(".input-ingredient");
 let ingredientsArray = [];
 let appareilsArray = [];
 let ustensilesArray = [];
@@ -45,8 +47,14 @@ const showIngredient = (newIngredients => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `${newIngredient}`
         ingredientsItem.appendChild(listItem);
-        listItem.classList.add('a-ingredients');
+        listItem.classList.add('li-ingredients');
         listItem.classList.add('dropdown-item');
+        // Affiche la valeur Selectionnée dans l'input
+        $(listItem).click(function() {
+            $(inputIngredients).attr("value", `${newIngredient}`);
+            $(".dropdown-ingredients").slideToggle();
+            $(".bloc-ingredients").toggleClass("changeWidth");
+        });
     })
 });
 
@@ -55,10 +63,16 @@ const showAppareil = (newAppareils => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `${newAppareil}`
         appareilsItem.appendChild(listItem);
-        listItem.classList.add('a-ingredients');
+        listItem.classList.add('li-appareils');
         listItem.classList.add('dropdown-item');
+        // Affiche la valeur Selectionnée dans l'input
+        $(listItem).click(function() {
+            $(inputAppareils).attr("value", `${newAppareil}`);
+            $(".dropdown-appareils").slideToggle();
+            $(".bloc-appareils").removeClass("changeWidth");
+        });
     })
-})
+});
 
 // Afficher ustensiles
 const showUstensile = (newUstensiles => {
@@ -66,24 +80,17 @@ const showUstensile = (newUstensiles => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `${newUstensile}`
         ustensilesItem.appendChild(listItem);
-        listItem.classList.add('a-ustensiles');
+        listItem.classList.add('li-ustensiles');
         listItem.classList.add('dropdown-item');
         listItem.setAttribute("value", `${newUstensile}`);
-        /*
         // Affiche la valeur Selectionnée dans l'input
         $(listItem).click(function() {
             $(inputUstensiles).attr("value", `${newUstensile}`);
-            $("ul").slideToggle();
-        })*/
+            $(".dropdown-ustensiles").slideToggle();
+            $(".bloc-ustensiles").removeClass("changeWidth");
+        });
     })
 });
-
-// // Affiche le résultat sélectionné dans l'input
-
-// const resultAparreil = (appareilsVal) => {
-//     document.getElementById("input-appareils").value = appareilsVal;
-// }; 
-
     
 
 showIngredient(noDuplicateIngredients);
