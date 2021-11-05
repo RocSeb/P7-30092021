@@ -1,4 +1,4 @@
-export { allRecipes }
+export { allRecipes };
 import { recipes } from "./recipes.js";
 
 let allRecipes = recipes;
@@ -22,19 +22,34 @@ console.log(allRecipes);
 //Ecouteur d'evenement qui filtre le contenu lorsque l'user entre une valeur
 searchBar.addEventListener('keyup', (e) => {
     //ciblage de la valeur introduit dans l'input en retournant un resultat en miniscule
-    const searchString = e.target.value.toLowerCase(); 
-    //filtrage des données + retour du resultat en minuscule + comparaison avec le resultat de la valeur de l'input
-    const filteredRecipes = allRecipes.filter( recipe => {  
-        return recipe.name.toLowerCase().includes(searchString)  
-    });
+    const searchString = e.target.value.toLowerCase();
+    if (searchString.length >= 3) {
+        //filtrage par nom de recette + retour du resultat en minuscule + comparaison avec le resultat de la valeur de l'input
+        const filteredRecipes = allRecipes.filter( recipe => { 
+            return recipe.name.toLowerCase().includes(searchString);
+        });
+        // const filteredIngredients = allRecipes.filter(recipe => {
+        //     const array1 = recipe.ingredients.map(element => {
+        //         return element.ingredient.toLowerCase();
+        //     });
+        //     return array1.includes(searchString);   
+        // });
+        // const filteredAppliances = allRecipes.filter( recipe => {  
+        //     return recipe.appliance.toLowerCase().includes(searchString);
+        // });
+        // let filteredElements = [filteredRecipes, filteredAppliances, filteredIngredients];
+        // console.log(filteredElements)
+    //filtrage par nom d'ingredient
     //execute la fonction d'ajout du contenu dans le DOM en mettant en parametre le filtrage de donnée
-    recipeCard(filteredRecipes);
+        renderRecipeCard(filteredRecipes);
+    } else {
+        renderRecipeCard(allRecipes);
+    }
 });
 
 // creation du composant card qui s'incrémente dynamiquement dans le DOM selon le nombre de résultat retourné par le fichier de données
-const recipeCard = (recipe) => {
-    const DOMCardContent = recipe
-    .map((recipe) => {
+export function renderRecipeCard(recipe) {
+    const DOMCardContent = recipe.map((recipe) => {
         return `
     <div class="card-menu">
         <img class="card-img-top" src="media/350x150.png" alt="Card image cap">
@@ -45,15 +60,15 @@ const recipeCard = (recipe) => {
             </div>
             <div class="recipe-info-container">
                 <div class="ingredients-container">
-            ${recipe.ingredients.map(element => 
+            ${recipe.ingredients.map(element => {
                 `
                 <div class="info-ingredient">
-                    <span><b>${element.ingredient} : </b></span>
+                    <span><b>${ element.ingredient } : </b></span>
                     <span>${ "quantity" in element ? element.quantity : ""} </span>
-                    <span>${ "unit" in element? element.unit : ""}</span>
+                    <span>${ "unit" in element ? element.unit : ""}</span>
                 </div>
                 `
-                ).join(" ")}
+            }).join(" ")}
                 </div>
                 <div class="instructions">
                     <span>${recipe.description}</span>
@@ -67,7 +82,7 @@ const recipeCard = (recipe) => {
     container.innerHTML = DOMCardContent;
 };
 
-recipeCard(allRecipes);
+renderRecipeCard(allRecipes);
 
 
 
