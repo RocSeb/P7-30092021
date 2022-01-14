@@ -8,7 +8,6 @@ const searchForm = document.querySelector('form');
 const card = document.querySelector('.card');
 const searchBar = document.getElementById('search-bar');
 let searchQuery = ''; //store the input value
-
 /***** 
  *
  * 1- Intégrer un evenement d'écoute de saisie sur l'input
@@ -25,9 +24,32 @@ searchBar.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
     if (searchString.length >= 3) {
         //filtrage par nom de recette + retour du resultat en minuscule + comparaison avec le resultat de la valeur de l'input
-        const filteredRecipes = allRecipes.filter( recipe => { 
-            return recipe.name.toLowerCase().includes(searchString);
+        const filteredRecipes = allRecipes.filter( recipe => {
+            console.log("----Start----");
+            const ingredientStr = recipe.ingredients.map(ingredients => {
+                return Object.values(ingredients).toString().toLowerCase();
+            });
+            //converti le resultat des ustensiles en string
+            const ustensileStr = recipe.ustensils.toString((ustensil) => {
+                if (ustensil.toLowerCase().includes(searchString) === true) {
+                    return ustensil.toLowerCase().includes(searchString);
+                }   
+            });
+            //console.log(ustensileStr, "<== ustensileStr");
+            const ingredient = ingredientStr.toString().toLowerCase().includes(searchString);
+            const name = recipe.name.toLowerCase().includes(searchString);
+            const appliance = recipe.appliance.toLowerCase().includes(searchString);
+            const ustensile = ustensileStr.includes(searchString);
+            console.log(ingredient, "<== ingredient");
+            // console.log(name, "<== name");
+            // console.log(appliance, "<== apply");
+            // console.log(ustensile, "<== ustensile");
+            console.log("----End----");
+             if(name || appliance || ustensile || ingredient === true) {
+                 return true;
+             }
         });
+        console.log(filteredRecipes, "<== FilteredRecipes");
         // const filteredIngredients = allRecipes.filter(recipe => {
         //     const array1 = recipe.ingredients.map(element => {
         //         return element.ingredient.toLowerCase();

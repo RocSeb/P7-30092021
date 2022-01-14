@@ -25,38 +25,41 @@
 			  </form>
 		  </div>
 
+      <div class="bloc-chips">
+      </div>
+
       <section class="section-drop">
-        <div class="bloc-dropdown bloc-ingredients">
-          <div class="content-drop">
-            <input  class="input-ingredient input-dropdown input-cont" type="text" list="ingredient" name="myIngredient" placeholder="Ingrédients"/>
-            <i class="fas fa-sort-down unroll-ingredients"></i>
+        <div class="bloc-dropdown" id="bloc-ingredients">
+          <div class="content-drop blue-bg">
+            <input id="ing-id" class="input-ingredient input-dropdown input-cont" type="text" list="ingredient" name="myIngredient" placeholder="Ingrédients"/>
+            <i id='icon-ing' class="fas fa-sort-down unroll-ingredients"></i>
           </div>
-            <div class="bouton-down">
-              <ul class="dropdown-ingredients dropdown-cont" id="ingredient" style="display: none;">
+            <div class="bouton-down blue-bg">
+              <ul class="dropdown-ingredients dropdown-cont" id="ingredients" >
                 
               </ul>
           </div>
         </div>
         
-        <div class="bloc-dropdown bloc-appareils">
-          <div class="content-drop">
-            <input  class="input-appareil input-dropdown input-cont" type="text" list="appliances" name="myAppliance" placeholder="Appareils"/>
-            <i class="fas fa-sort-down unroll-appareils"></i>
+        <div class="bloc-dropdown" target-id="bloc-appareils" id="bloc-appareils">
+          <div class="content-drop green-bg">
+            <input id="app-id" class="input-appareil input-dropdown input-cont" target-id="bloc-appareils" type="text" list="appliances" name="myAppliance" placeholder="Appareils"/>
+            <i id="icon-app" class="fas fa-sort-down unroll-appareils" target-id="bloc-appareils"></i>
           </div>
-            <div class="bouton-down">
-              <ul class="dropdown-appareils dropdown-cont" id="appliances" style="display: none;">
+            <div class="bouton-down green-bg">
+              <ul class="dropdown-appareils dropdown-cont" id="appliances">
                 
               </ul>
           </div>
         </div>
         
-        <div class="bloc-dropdown bloc-ustensiles">
-          <div class="content-drop">
-            <input  class="input-ustensiles input-dropdown input-cont" type="text" list="ustensiles" name="myUstensile" placeholder="Ustensiles"/>
-            <i class="fas fa-sort-down unroll-ustensiles"></i>
+        <div class="bloc-dropdown" id="bloc-ustensiles">
+          <div class="content-drop red-bg">
+            <input id="ust-id" class="input-ustensiles input-dropdown input-cont" type="text" list="ustensiles" name="myUstensile" placeholder="Ustensiles"/>
+            <i id="icon-ust" class="fas fa-sort-down unroll-ustensiles"></i>
           </div>
-            <div class="bouton-down">
-              <ul class="dropdown-ustensiles dropdown-cont" id="ustensiles" style="display: none;">
+            <div class="bouton-down red-bg">
+              <ul class="dropdown-ustensiles dropdown-cont" id="ustensiles">
                 
               </ul>
           </div>
@@ -81,22 +84,5 @@
     <script type="module" src="js/ingredientSearch.js"></script>
     <script type="module" src="js/UstensileSearch.js"></script>
     <script type="module" src="js/appareilSearch.js"></script>
-    <script>
-      $(".unroll-ingredients").click(function() {
-        $(this).toggleClass("on");
-        $(".dropdown-ingredients").slideToggle();
-        $(".bloc-ingredients").toggleClass("changeWidth");
-      });
-      $(".unroll-appareils").click(function() {
-        $(this).toggleClass("on");
-        $(".dropdown-appareils").slideToggle();
-        $(".bloc-appareils").toggleClass("changeWidth");
-      });
-      $(".unroll-ustensiles").click(function() {
-        $(this).toggleClass("on");
-        $(".dropdown-ustensiles").slideToggle();
-        $(".bloc-ustensiles").toggleClass("changeWidth");
-      });
-    </script>
 </body>
 </html>

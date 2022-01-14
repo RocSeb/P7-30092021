@@ -4,9 +4,10 @@ import { renderRecipeCard } from "./recipes-box.js";
 
 let dropRecipes = recipes;
 const ingredientsItem = document.querySelector(".dropdown-ingredients");
-const dropButton = document.querySelector(".fa-sort-down");
 const inputIngredients = document.querySelector(".input-ingredient");
+const chipIngredient = document.querySelector(".bloc-chips");
 let ingredientsArray = [];
+const chips = [];
 
 //Remplir tableau ingredientsArray[]
 dropRecipes.forEach(dropRecipe => {
@@ -34,10 +35,54 @@ inputIngredients.addEventListener('keyup', (e) => {
 // Rajoute les ustensiles dans une balise <li></li> dans le DOM
 const renderListIngredient = (recipes => {
     const DOMIngredientContent = recipes.map((recipe) => {
+        console.log(recipe, "<=== recipe");
+        const dataValue = typeof recipe === "string" ? recipe : recipe.ingredients;
     return `
-    <li class="li-ingredient dropdown-item">${(typeof recipe === "string" ? recipe : recipe.ingredients)}</li>
+    <li class="li-ingredient dropdown-item" data-selected="${ dataValue }">${ dataValue }</li>
     `
     }).join(" ");
     ingredientsItem.innerHTML = DOMIngredientContent;
+    //
+    const listItemIngredient = document.querySelectorAll(".dropdown-ingredients li");
+//créer un chip avec l'ingredient sélectionné en value
+    listItemIngredient.forEach((listItem) => {
+        listItem.addEventListener('click', () => {
+            const dataValue = listItem.getAttribute("data-selected");
+            const chipCreate = document.createElement('div');
+            const chipContainer = document.createElement('div');
+            const chipContent = document.createTextNode(dataValue);
+            chipCreate.setAttribute('class', 'chip-container blue-bg');
+            chipContainer.setAttribute('class', 'chip-content active');
+            chipContainer.appendChild(chipContent);
+
+            const closeChip = document.createElement('button');
+            closeChip.setAttribute('class', 'close-button');
+            closeChip.innerHTML = '&#10006;';
+            closeChip.onclick = removeChip;
+
+            chipCreate.appendChild(chipContainer);
+            chipCreate.appendChild(closeChip);
+            chipIngredient.appendChild(chipCreate);
+            chips.push(chipCreate);
+        });
+        const removeChip = (e) => {
+            const item = e.target.textContent;
+            e.target.parentElement.remove();
+            chips.splice(chips.indexOf(item), 1);
+        };
+    });
 });
+//Déroule la dropdown ingredient
+const toggleIngredient = document.getElementById("ing-id");
+      toggleIngredient.addEventListener('click', () => {
+        document.getElementById("ingredients").classList.add("show-ing");
+        document.getElementById("bloc-ingredients").classList.add("changeWidth");
+      });
+const iconToggleIng = document.getElementById("icon-ing");
+      iconToggleIng.addEventListener('click', () => {
+        document.getElementById("ingredients").classList.toggle("show-ing");
+        document.getElementById("bloc-ingredients").classList.toggle("changeWidth");
+      })
 renderListIngredient(noDuplicateIngredients);
+
+

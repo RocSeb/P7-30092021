@@ -108,7 +108,7 @@ header figure a #logo-size{
     margin-right: 20px;
 }
 .changeWidth {
-    max-width: none !important;
+    min-width: 500px !important;
 }
 
 .input-cont {
@@ -129,9 +129,23 @@ header figure a #logo-size{
     display: flex;
     width: 100%;
     padding-right: 10px;
-    background-color: green;
     border-radius: 5px;
 }
+ .blue-bg {
+    background-color: #0d6efd ;
+ }
+ .red-bg {
+    background-color: #f54646;
+ }
+ .green-bg {
+    background-color: #31c795;
+ }
+ .bloc-chips {
+     display: flex;
+     flex-direction: row;
+     justify-content: flex-start;
+     align-items: center;
+ }
 .input-dropdown {
     display: inline-block;
 }
@@ -139,12 +153,26 @@ header figure a #logo-size{
     font-size: 1.4rem;
     color: white;
 }
-.bouton-down {
+#bouton-down-appareil {
+    display: none;
     position: relative;
     width: 30vw;
-    background-color: green;
     top: -5px;
 }
+.show-appareils {
+    display: block;
+}
+.bouton-down-ingredient {
+    position: relative;
+    width: 30vw;
+    top: -5px;
+}
+.bouton-down-ustensile {
+    position: relative;
+    width: 30vw;
+    top: -5px;
+}
+
 
 .on {
     font-size: 1.4rem;
@@ -153,7 +181,33 @@ header figure a #logo-size{
 .input-cont{
     float: left;
 }
-.dropdown-cont{
+
+.dropdown-appareils {
+    display: none;
+}
+.dropdown-ingredients {
+    display: none;
+}
+.dropdown-ustensiles {
+    display: none;
+}
+.show-app {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    padding: .25rem .5rem !important;
+}
+.show-ust {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    padding: .25rem .5rem !important;
+}
+.show-ing {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -172,6 +226,41 @@ header figure a #logo-size{
 }
 .dropdown-cont li:hover {
     background-color: rgba(0, 0, 0, 0.2);
+}
+.chip-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px 0 5px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid none;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 2%;
+    margin-right: 1%;
+}
+.chip-container div {
+    width: 65px;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+}
+button {
+    border: none;
 }
 
 @media (max-width: 1250px) {
