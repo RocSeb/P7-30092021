@@ -35,7 +35,6 @@ inputIngredients.addEventListener('keyup', (e) => {
 // Rajoute les ustensiles dans une balise <li></li> dans le DOM
 const renderListIngredient = (recipes => {
     const DOMIngredientContent = recipes.map((recipe) => {
-        console.log(recipe, "<=== recipe");
         const dataValue = typeof recipe === "string" ? recipe : recipe.ingredients;
     return `
     <li class="li-ingredient dropdown-item" data-selected="${ dataValue }">${ dataValue }</li>

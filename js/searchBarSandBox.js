@@ -1,40 +1,72 @@
-/***********
- * 1. importer le json dans une variable global
- * 2. créer variable de recettes filtrés
- * 3. créer variable de nom des recettes filtrés
- * 4. créer variable de type array de la liste des ingrédients
- * 5. créer variale de type array de la liste des ustensiles
- * 6. créer variable de type array de la liste des appareils
- * 7. créer variable de type string d'ingrédients filtrés
- * 8. créer variable de type string d'ustensiles filtrés
- * 9. créer variable de type string d'appareils filtrés
- **********/
+//import database with all recipe
+import { data } from "./recipes.js";
 
- export { allRecipes };
- import { recipes } from "./recipes.js";
- 
- let allRecipes = recipes;
- let recipeName = [];
- const container = document.getElementById('recipes-container');
- const searchForm = document.querySelector('form');
- const card = document.querySelector('.card');
- const searchBar = document.getElementById('search-bar');
- let searchQuery = ''; //store the input value
+//store last results
+let lastSearch = [];
+export function getLastSearch() {
+    return lastSearch;
+};
 
- searchBar.addEventListener('keyup', (e) => {
-    //ciblage de la valeur introduit dans l'input en retournant un resultat en miniscule
-    const searchString = e.target.value.toLowerCase();
+export function search(request, appliance, ustensil, ingredients) {
+    let recipes = data.recipes;
+    recipes = matchAppliance(recipes, appliance.toLowerCase());
+    recipes = matchUstensils(recipes, ustensil.toLowerCase());
+    recipes = matchIngredients(recipes, ingredients);
+    recipes = matchContent(recipes, request.toLowerCase());
+    //save the result
+    lastSearch = [appliance, ustensil, ingredients, recipes];
+    return recipes;
+}
 
-    if (searchString.length >= 3) {
-        //filtrage des données + retour du resultat en minuscule + comparaison avec le resultat de la valeur de l'input
-        const filteredRecipes = allRecipes.filter( recipe => {  
-            return recipe.name.toLowerCase().includes(searchString);
-            recipe.ingredients.forEach(listeIngredient => {
-                return listeIngredient.ingredient.toLowerCase().includes(searchString);
-            }); 
-        });
-        recipeCard(filteredRecipes);
+//check if a recipe with all tagged apliance
+function matchAppliance(recipes, appliance) {
+    let recipesMatched = [];
+    for (let recipe of recipes) {
+        if (recipe.appliance.toLowerCase().includes(appliance)) {
+            recipesMatched.push(recipe)
+        }
     }
-    //execute la fonction d'ajout du contenu dans le DOM en mettant en parametre le filtrage de donnée
-    
-});
+    return recipesMatched;
+}
+// ustensil
+function matchUstensils(recipes, ustensil) {
+    let recipesMatched = [];
+    for (let recipe of recipes) {
+        if (ustensil == "" || recipe.ustensils.filter(usten => usten.includes(ustensil)).length > 0) {
+            recipesMatched.push(recipe)
+        }
+    }
+    return recipesMatched;
+}
+
+//ingredient
+function matchIngredients(recipes, ingredients) {
+    let recipesMatched = [];
+    for (let recipe of recipes) {
+        let ingredientsMatch = []
+        ingredients.forEach(ingredient => {
+            ingredientsMatch.push(
+                recipe.ingredients.filter(recIngredient =>
+                    recIngredient.ingredient.toLowerCase().includes(ingredient.toLowerCase())    
+                ).length > 0 
+        )})
+        if (ingredientsMatch.every(match => match == true)) {
+            recipesMatched.push(recipe)
+        }
+    }
+    return recipesMatched;
+}
+
+function matchContent(recipes, request) {
+    let recipesMatched = [];
+    for (let recipe of recipes) {
+        if (recipe.name.toLowerCase().includes(request) 
+            || recipe.description.toLowerCase().includes(request)
+            || recipe.ingredients
+                .filter(ingredient => ingredient.ingredient
+                    .toLowerCase().includes(request)).length > 0) {
+            recipesMatched.push(recipe)
+        }
+    }
+    return recipesMatched;
+}

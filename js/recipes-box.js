@@ -8,6 +8,8 @@ const searchForm = document.querySelector('form');
 const card = document.querySelector('.card');
 const searchBar = document.getElementById('search-bar');
 let searchQuery = ''; //store the input value
+let arrayRecipeFiltered = [];
+export { arrayRecipeFiltered };
 /***** 
  *
  * 1- Intégrer un evenement d'écoute de saisie sur l'input
@@ -16,7 +18,6 @@ let searchQuery = ''; //store the input value
  * 4- contrôler l'affichage par rapport au contenu du tableau de la variable qui contient le résultat du filtrage
  * 
  *  *****/
-console.log(allRecipes);
 
 //Ecouteur d'evenement qui filtre le contenu lorsque l'user entre une valeur
 searchBar.addEventListener('keyup', (e) => {
@@ -25,7 +26,6 @@ searchBar.addEventListener('keyup', (e) => {
     if (searchString.length >= 3) {
         //filtrage par nom de recette + retour du resultat en minuscule + comparaison avec le resultat de la valeur de l'input
         const filteredRecipes = allRecipes.filter( recipe => {
-            console.log("----Start----");
             const ingredientStr = recipe.ingredients.map(ingredients => {
                 return Object.values(ingredients).toString().toLowerCase();
             });
@@ -35,42 +35,32 @@ searchBar.addEventListener('keyup', (e) => {
                     return ustensil.toLowerCase().includes(searchString);
                 }   
             });
-            //console.log(ustensileStr, "<== ustensileStr");
             const ingredient = ingredientStr.toString().toLowerCase().includes(searchString);
             const name = recipe.name.toLowerCase().includes(searchString);
             const appliance = recipe.appliance.toLowerCase().includes(searchString);
             const ustensile = ustensileStr.includes(searchString);
-            console.log(ingredient, "<== ingredient");
-            // console.log(name, "<== name");
-            // console.log(appliance, "<== apply");
-            // console.log(ustensile, "<== ustensile");
-            console.log("----End----");
              if(name || appliance || ustensile || ingredient === true) {
                  return true;
              }
         });
-        console.log(filteredRecipes, "<== FilteredRecipes");
-        // const filteredIngredients = allRecipes.filter(recipe => {
-        //     const array1 = recipe.ingredients.map(element => {
-        //         return element.ingredient.toLowerCase();
-        //     });
-        //     return array1.includes(searchString);   
-        // });
-        // const filteredAppliances = allRecipes.filter( recipe => {  
-        //     return recipe.appliance.toLowerCase().includes(searchString);
-        // });
-        // let filteredElements = [filteredRecipes, filteredAppliances, filteredIngredients];
-        // console.log(filteredElements)
-    //filtrage par nom d'ingredient
+        arrayRecipeFiltered = filteredRecipes;
     //execute la fonction d'ajout du contenu dans le DOM en mettant en parametre le filtrage de donnée
         renderRecipeCard(filteredRecipes);
     } else {
+        
         renderRecipeCard(allRecipes);
     }
 });
 
+export function updateFilterTag() {
+    console.log(arrayRecipeFiltered, "updated");
+    return arrayRecipeFiltered;
+    
+};
+
 // creation du composant card qui s'incrémente dynamiquement dans le DOM selon le nombre de résultat retourné par le fichier de données
 export function renderRecipeCard(recipe) {
+    arrayRecipeFiltered = recipe;
     const DOMCardContent = recipe.map((recipe) => {
         return `
     <div class="card-menu">
@@ -105,6 +95,7 @@ export function renderRecipeCard(recipe) {
 };
 
 renderRecipeCard(allRecipes);
+console.log(arrayRecipeFiltered, "filtré");
 
 
 

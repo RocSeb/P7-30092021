@@ -259,6 +259,15 @@ header figure a #logo-size{
     background-color: rgba(0, 0, 0, 0);
     border-radius: 50%;
 }
+.empty-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 50vh;
+}
+
 button {
     border: none;
 }
